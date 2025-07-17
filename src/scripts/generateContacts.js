@@ -3,9 +3,14 @@ import { writeContacts } from "../utils/writeContacts.js";
 import { createFakeContact } from "../utils/createFakeContact.js";
 
 
-const generateContacts = async (number = 5) => {
+const generateContacts = async (number) => {
     const contacts = await readContacts();
-    const newContacts = Array.from({length : number},createFakeContact);
+      const newContacts = [];
+
+    for (let i = 0; i < number; i++) {
+        const contact = createFakeContact();
+        newContacts.push(contact);
+  }
     const updatedContacts = [...contacts, ...newContacts];
     await writeContacts(updatedContacts);
  };
